@@ -1,7 +1,11 @@
+const Mecab = require('mecab-async'),
+    mecab = new Mecab();
+
 class PersonNameFilter {
     constructor(words) {
-        this.words = words;
-        console.log(words);
+        this.words = mecab.parseSync(words, function (err, result) {
+            if (err) throw err;
+        });
         this.nouns = this.words.filter(word => {
             const type = word[2];
             return type === '一般' || type === '固有名詞';

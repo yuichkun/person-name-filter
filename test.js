@@ -1,11 +1,5 @@
-const Mecab = require('mecab-async'),
-    mecab = new Mecab();
-const words = mecab.parseSync('こういちは村澤のことがすきです', function (err, result) {
-    if (err) throw err;
-});
-
 const PersonNameFilter = require('./index');
-const filter = new PersonNameFilter(words);
+const filter = new PersonNameFilter('すずきは琢磨のことがきらいだ');
 
 if (filter.hasNouns) {
     const personName = filter.extractPersonName();
